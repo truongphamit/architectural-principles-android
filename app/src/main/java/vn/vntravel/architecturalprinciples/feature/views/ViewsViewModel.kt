@@ -48,7 +48,7 @@ class ViewsViewModel @Inject constructor(private val searchFlightTicketsUseCase:
         val request = SearchFlightTicketRequest(
             fromAirport = "HAN",
             toAirport = "SGN",
-            depart = "010-10-2022",
+            depart = "10-10-2022",
             numAdults = 1,
             numChilds = 0,
             numInfants = 0,
