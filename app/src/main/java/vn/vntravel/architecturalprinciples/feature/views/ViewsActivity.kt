@@ -1,6 +1,7 @@
 package vn.vntravel.architecturalprinciples.feature.views
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -14,9 +15,20 @@ class ViewsActivity : AppCompatActivity() {
 
     private val viewModel: ViewsViewModel by viewModels()
 
+    private val adapter: TicketAdapter by lazy {
+        TicketAdapter()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_views)
-        viewModel.searchFlightTickets()
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        binding.rvTickets.adapter = adapter
+
+        viewModel.tickets.observe(this) { tickets ->
+            adapter.submitList(tickets)
+        }
     }
 }

@@ -14,7 +14,7 @@ class SearchFlightTicketsUseCase(private val flightRepository: FlightRepository)
                 val response = flightRepository.search(request)
                 request.waitFor = response.data?.waitFor
                 send(response.data?.tickets ?: arrayListOf())
-                delay(1000)
+                delay(500)
             } while (response.data?.polling == true)
         }
     }
